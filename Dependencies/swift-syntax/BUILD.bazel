@@ -1,0 +1,136 @@
+load("//utils/bazel:swift_syntax_library.bzl", "swift_syntax_library")
+
+package(default_visibility = ["//visibility:public"])
+
+swift_syntax_library(
+    name = "SwiftIDEUtils",
+    deps = [
+        ":SwiftSyntax",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftSyntax",
+    deps = [],
+)
+
+swift_syntax_library(
+    name = "SwiftBasicFormat",
+    deps = [
+        ":SwiftSyntax",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftCompilerPlugin",
+    deps = [
+        ":SwiftCompilerPluginMessageHandling",
+        ":SwiftSyntaxMacros",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftCompilerPluginMessageHandling",
+    deps = [
+        ":SwiftDiagnostics",
+        ":SwiftOperators",
+        ":SwiftParser",
+        ":SwiftSyntaxMacroExpansion",
+        ":SwiftSyntaxMacros",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftSyntaxMacroExpansion",
+    deps = [
+        ":SwiftOperators",
+        ":SwiftSyntax",
+        ":SwiftSyntaxMacros",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftDiagnostics",
+    deps = [
+        ":SwiftSyntax",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftSyntaxMacros",
+    deps = [
+        ":SwiftDiagnostics",
+        ":SwiftParser",
+        ":SwiftSyntax",
+        ":SwiftSyntaxBuilder",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftParser",
+    deps = [
+        ":SwiftBasicFormat",
+        ":SwiftDiagnostics",
+        ":SwiftSyntax",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftParserDiagnostics",
+    deps = [
+        ":SwiftBasicFormat",
+        ":SwiftDiagnostics",
+        ":SwiftParser",
+        ":SwiftSyntax",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftSyntaxBuilder",
+    deps = [
+        ":SwiftBasicFormat",
+        ":SwiftParser",
+        ":SwiftParserDiagnostics",
+        ":SwiftSyntax",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftOperators",
+    deps = [
+        ":SwiftDiagnostics",
+        ":SwiftParser",
+        ":SwiftSyntax",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftRefactor",
+    deps = [
+        ":SwiftParser",
+        ":SwiftSyntax",
+        ":SwiftSyntaxBuilder",
+    ],
+)
+
+swift_syntax_library(
+    name = "SwiftSyntaxMacrosTestSupport",
+    testonly = True,
+    deps = [
+        ":SwiftDiagnostics",
+        ":SwiftParser",
+        ":SwiftSyntaxMacroExpansion",
+        ":SwiftSyntaxMacros",
+        ":_SwiftSyntaxTestSupport",
+    ],
+)
+
+swift_syntax_library(
+    name = "_SwiftSyntaxTestSupport",
+    testonly = True,
+    deps = [
+        ":SwiftBasicFormat",
+        ":SwiftSyntax",
+        ":SwiftSyntaxBuilder",
+    ],
+)

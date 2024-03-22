@@ -1,0 +1,35 @@
+#[[
+This source file is part of the Swift Collections Open Source Project
+
+Copyright (c) 2021 - 2024 Apple Inc. and the Swift project authors
+Licensed under Apache License v2.0 with Runtime Library Exception
+
+See https://swift.org/LICENSE.txt for license information
+#]]
+
+add_library(DequeModule
+  "Deque+Codable.swift"
+  "Deque+Collection.swift"
+  "Deque+CustomReflectable.swift"
+  "Deque+Descriptions.swift"
+  "Deque+Equatable.swift"
+  "Deque+ExpressibleByArrayLiteral.swift"
+  "Deque+Extras.swift"
+  "Deque+Hashable.swift"
+  "Deque+Sendable.swift"
+  "Deque+Testing.swift"
+  "Deque._Storage.swift"
+  "Deque._UnsafeHandle.swift"
+  "Deque.swift"
+  "_DequeBuffer.swift"
+  "_DequeBufferHeader.swift"
+  "_DequeSlot.swift"
+  "_UnsafeWrappedBuffer.swift"
+  )
+target_link_libraries(DequeModule PRIVATE
+  _CollectionsUtilities)
+set_target_properties(DequeModule PROPERTIES
+  INTERFACE_INCLUDE_DIRECTORIES ${CMAKE_Swift_MODULE_DIRECTORY})
+
+_install_target(DequeModule)
+set_property(GLOBAL APPEND PROPERTY SWIFT_COLLECTIONS_EXPORTS DequeModule)
